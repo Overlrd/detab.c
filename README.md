@@ -1,5 +1,4 @@
-# DETAB
-
+# detab.c
 ```
 Usage: ./detab <char> [MAXCHAR] [MAXLINE] [TABWIDTH]
   <char>       : Character to replace tabs (must be a single character)
