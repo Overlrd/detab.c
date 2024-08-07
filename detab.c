@@ -2,19 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int MAXCHAR = 100;
-int MAXLINE = 100;
+int MAXCHAR = 1000;
+int MAXLINE = 1000;
 int TABWIDTH = 4;
-int R = ' ';
+int REPL = ' ';
 
 void parse_arguments(int argc, char *argv[]);
 int read_next_line(char line[], int lim);
-int copy(char to[], char from[], int startIndexFrom, int startIndexTo,
-         size_t toSize);
 
 void parse_arguments(int argc, char *argv[]) {
   if (argc < 2 || argc > 5) {
     printf("Usage: %s <char> [MAXCHAR] [MAXLINE] [TABWIDTH]\n", argv[0]);
+
     printf("  <char>       : Character to replace tabs (must be a single "
            "character)\n");
     printf("  [MAXCHAR]    : Maximum number of characters per line (default: "
@@ -26,7 +25,7 @@ void parse_arguments(int argc, char *argv[]) {
     exit(1);
   }
 
-  R = argv[1][0];
+  REPL = argv[1][0];
   if (argv[1][1] != '\0') {
     printf("Error: Only one character is allowed for replacement.\n");
     exit(1);
@@ -79,7 +78,7 @@ int main(int argc, char *argv[]) {
         }
 
         for (int j = 0; j < TABWIDTH; j++) {
-          output[outputIndex++] = R;
+          output[outputIndex++] = REPL;
         }
 
       } else {
@@ -99,7 +98,7 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-int read_next_line(char line[], int lim) {
+int read_next_line(char *line, int lim) {
   int c, i;
 
   for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; i++) {
@@ -114,29 +113,4 @@ int read_next_line(char line[], int lim) {
   line[i] = '\0';
 
   return i;
-}
-
-int copy(char to[], char from[], int startIndexFrom, int startIndexTo,
-         size_t toSize) {
-  int i = startIndexFrom;
-  int j = startIndexTo;
-
-  // make sure the indexes are valid
-  if (startIndexFrom < 0 || startIndexTo < 0) {
-    return -1;
-  }
-
-  // make sure there's enough space in the destination array
-  if (toSize <= (size_t)startIndexTo) {
-    return -1;
-  }
-
-  while (from[i] != '\0' && j < (int)toSize - 1) {
-    to[j] = from[i];
-    i++;
-    j++;
-  }
-  to[j] = '\0';
-
-  return i - startIndexFrom;
 }
