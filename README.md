@@ -1,8 +1,16 @@
 # detab.c
 ```
-Usage: ./detab <char> [MAXCHAR] [MAXLINE] [TABWIDTH]
-  <char>       : Character to replace tabs (must be a single character)
-  [MAXCHAR]    : Maximum number of characters per line (default: 100)
-  [MAXLINE]    : Maximum number of lines to process (default: 100)
-  [TABWIDTH]   : Number of spaces to replace each tab (default: 4)
+/*
+* Filename:    detab.c
+*
+* The C Programming Language, second edition,
+* by Brian Kernighan and Dennis Ritchie
+*
+* Exercise 1-20, page 34
+*
+* Write a program detab that replaces tabs in the input with the proper
+* number of blanks to space to the next tab stop. Assume a fixed set of
+* tab stops, say every n columns. Should n be a variable or a symbolic
+* parameter?
+*/
 ```
